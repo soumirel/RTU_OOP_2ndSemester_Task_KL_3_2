@@ -7,7 +7,8 @@
 
 using namespace std;
 
-class Cl_base {
+class Cl_base 
+{
 private:
 	// Имя объекта
 	string objectName = "";

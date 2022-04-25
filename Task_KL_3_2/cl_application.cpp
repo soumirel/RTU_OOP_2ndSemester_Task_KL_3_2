@@ -143,8 +143,6 @@ void Cl_application::treeNavigation()
 
 		cin >> command;
 	}
-
-
 }
 
 
@@ -156,11 +154,6 @@ int Cl_application::execApp()
 
 	//Запуск навигации по дереву
 	this->treeNavigation();
-
-	//Вывод дерева и готовностей объектов
-	//В текущей реализации не используется
-	//cout << "\nThe tree of objects and their readiness";
-	//root->childrenList.at(0)->printTree(true);
 
 	return 0;
 }

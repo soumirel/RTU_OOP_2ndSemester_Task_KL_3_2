@@ -1,6 +1,6 @@
 #include "Cl_base.h"
 
-// Создание объекта-прородителя
+// Создание объекта-прародителя
 Cl_base* Cl_base::root = new Cl_base();
 
 //Конструктор
@@ -122,7 +122,7 @@ Cl_base* Cl_base::getObjectByPath(string path)
 	//Путь указывает на уникальное имя на дереве объектов.
 	if (path.at(0) == '/' && path.at(1) == '/')
 	{
-		return (root->getObjectByName(path.substr(2, pathSize)));
+		return (root->getObjectByName(path.substr(2)));
 	}
 
 	string currentObjectName;
