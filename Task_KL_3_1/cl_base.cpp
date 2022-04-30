@@ -114,30 +114,16 @@ Cl_base* Cl_base::getObjectByPath(string path)
 	//Путь указывает на корневой объект.
 	if (path == "/")
 	{
-		return root->childrenList.at(0);
+		return root->childrenList.front();
 	}
 
 	size_t pathSize = path.size();
 
 	//Путь указывает на уникальное имя на дереве объектов.
-	if (path.at(0) == '/' && path.at(1) == '/')
+	if (path.front() == '/' && path.at(1) == '/')
 	{
 		return (root->getObjectByName(path.substr(2)));
 	}
-
-	//string currentObjectName;
-	//vector<string> objectsNameFromPath;
-
-	//Если путь абсолютный - строка разбивается 
-	// на токены начиная с 1ого символа.
-	//size_t iter = 0;
-	//bool isAbsolutePath = false;
-	//if (path.at(0) == '/')
-	//{
-	//	isAbsolutePath = true;
-	//	objectsNameFromPath.push_back(root->childrenList.at(0)->getName());
-	//	iter = 1;
-	//}
 
 	//Разбиение строки на имена объектов
 
@@ -145,7 +131,7 @@ Cl_base* Cl_base::getObjectByPath(string path)
 	Cl_base* currentObject = this;
 	size_t currentChildrenListSize = currentObject->childrenList.size();
 	string nextObjectName = "";
-	if (path.at(0) == '/')
+	if (path.front() == '/')
 	{
 		iter = 1;
 	}
@@ -182,54 +168,6 @@ Cl_base* Cl_base::getObjectByPath(string path)
 	}
 
 	return currentObject;
-
-	//objectsNameFromPath.push_back(currentObjectName);
-
-
-
-
-	//Утверждение корректоности введённого пути.
-	//Проверка по зависимости родитель-ребёнок на дереве иерархии.
-	/*Cl_base* currentObject = nullptr;
-	size_t objectsNumber = objectsNameFromPath.size();
-	bool isFindNextObject;
-
-	for (size_t i = 0; i < objectsNumber; i++)
-	{
-		if (i == 0)
-		{
-			if (isAbsolutePath)
-			{
-				currentObject = root->childrenList.at(0);
-			}
-			else
-			{
-				currentObject = root->getObjectByName(objectsNameFromPath.at(0));
-			}
-		}
-		else
-		{
-			isFindNextObject = false;
-			size_t currentSize = currentObject->childrenList.size();
-
-			for (size_t j = 0; j < currentSize; j++)
-			{
-				if (currentObject->childrenList.at(j)->getName() == objectsNameFromPath.at(i))
-				{
-					currentObject = currentObject->childrenList.at(j);
-					isFindNextObject = true;
-					break;
-				}
-			}
-
-			if (!isFindNextObject)
-			{
-				return nullptr;
-			}
-		}
-	}
-
-	return currentObject;*/
 }
 
 

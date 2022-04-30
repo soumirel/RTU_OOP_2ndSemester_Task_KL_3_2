@@ -30,7 +30,7 @@ void Cl_application::buildTree()
 	{
 		cin >> childName >> classNumber;
 
-		Cl_base* currentParentPtr = root->childrenList.at(0)->getObjectByPath(path);
+		Cl_base* currentParentPtr = root->childrenList.front()->getObjectByPath(path);
 
 		//Досрочное завершение работы программы
 		//если на этапе построения системы объектов возникла ошибка.
@@ -102,7 +102,7 @@ void Cl_application::enterReadiness()
 //установку выбранного объекта и поиска объекта по заданному пути.
 void Cl_application::treeNavigation()
 {
-	Cl_base* settedObjectPtr = root->childrenList.at(0);
+	Cl_base* settedObjectPtr = root->childrenList.front();
 	Cl_base* objectFromPath;
 
 	string command, path;
@@ -150,7 +150,7 @@ int Cl_application::execApp()
 {
 	// Вывод построенного дерева;
 	cout << "Object tree";
-	root->childrenList.at(0)->printTree(false);
+	root->childrenList.front()->printTree(false);
 
 	//Запуск навигации по дереву
 	this->treeNavigation();
