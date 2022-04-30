@@ -30,7 +30,7 @@ void Cl_application::buildTree()
 	{
 		cin >> childName >> classNumber;
 
-		Cl_base* currentParentPtr = getObjectByPath(path);
+		Cl_base* currentParentPtr = root->childrenList.at(0)->getObjectByPath(path);
 
 		//Досрочное завершение работы программы
 		//если на этапе построения системы объектов возникла ошибка.
@@ -55,10 +55,6 @@ void Cl_application::buildTree()
 
 		case 3:
 		{
-			if (childName == "object_7")
-			{
-				cout << "flag!";
-			}
 			Cl_base* child = new Cl_branch_2(childName, currentParentPtr);
 			break;
 		}
@@ -106,7 +102,7 @@ void Cl_application::enterReadiness()
 //установку выбранного объекта и поиска объекта по заданному пути.
 void Cl_application::treeNavigation()
 {
-	Cl_base* setedObjectPtr = root->childrenList.at(0);
+	Cl_base* settedObjectPtr = root->childrenList.at(0);
 	Cl_base* objectFromPath;
 
 	string command, path;
@@ -118,18 +114,18 @@ void Cl_application::treeNavigation()
 		cout << '\n';
 		cin >> path;
 
-		objectFromPath = setedObjectPtr->getObjectByPath(path);
+		objectFromPath = settedObjectPtr->getObjectByPath(path);
 
 		if (command == "SET")
 		{
 			if (objectFromPath)
 			{
-				setedObjectPtr = objectFromPath;
-				cout << "Object is set: " << setedObjectPtr->getName();
+				settedObjectPtr = objectFromPath;
+				cout << "Object is set: " << settedObjectPtr->getName();
 			}
 			else
 			{
-				cout << "Object is not found: " << setedObjectPtr->getName() << " " << path;
+				cout << "Object is not found: " << settedObjectPtr->getName() << " " << path;
 			}
 		}
 

@@ -125,38 +125,72 @@ Cl_base* Cl_base::getObjectByPath(string path)
 		return (root->getObjectByName(path.substr(2)));
 	}
 
-	string currentObjectName;
-	vector<string> objectsNameFromPath;
+	//string currentObjectName;
+	//vector<string> objectsNameFromPath;
 
 	//Если путь абсолютный - строка разбивается 
 	// на токены начиная с 1ого символа.
+	//size_t iter = 0;
+	//bool isAbsolutePath = false;
+	//if (path.at(0) == '/')
+	//{
+	//	isAbsolutePath = true;
+	//	objectsNameFromPath.push_back(root->childrenList.at(0)->getName());
+	//	iter = 1;
+	//}
+
+	//Разбиение строки на имена объектов
+
 	size_t iter = 0;
-	bool isAbsolutePath = false;
+	Cl_base* currentObject = this;
+	size_t currentChildrenListSize = currentObject->childrenList.size();
+	string nextObjectName = "";
 	if (path.at(0) == '/')
 	{
-		isAbsolutePath = true;
-		objectsNameFromPath.push_back(root->childrenList.at(0)->getName());
 		iter = 1;
 	}
 
-	//Разбиение строки на имена объектов
-	for (; iter < pathSize; iter++)
+	bool isFoundNextObject = false;
+	for (; iter <= pathSize; iter++)
 	{
-		if (path.at(iter) == '/')
+		if (iter == pathSize || path.at(iter) == '/')
 		{
-			objectsNameFromPath.push_back(currentObjectName);
-			currentObjectName = "";
+			isFoundNextObject = false;
+			currentChildrenListSize = currentObject->childrenList.size();
+
+			for (size_t j = 0; j < currentChildrenListSize; j++)
+			{
+				if (currentObject->childrenList.at(j)->getName() == nextObjectName)
+				{
+					currentObject = currentObject->childrenList.at(j);
+					isFoundNextObject = true;
+					break;
+				}
+			}
+
+			if (isFoundNextObject == false)
+			{
+				return nullptr;
+			}
+
+			nextObjectName = "";
 		}
 		else
 		{
-			currentObjectName += path.at(iter);
+			nextObjectName += path.at(iter);
 		}
 	}
-	objectsNameFromPath.push_back(currentObjectName);
+
+	return currentObject;
+
+	//objectsNameFromPath.push_back(currentObjectName);
+
+
+
 
 	//Утверждение корректоности введённого пути.
 	//Проверка по зависимости родитель-ребёнок на дереве иерархии.
-	Cl_base* currentObject = nullptr;
+	/*Cl_base* currentObject = nullptr;
 	size_t objectsNumber = objectsNameFromPath.size();
 	bool isFindNextObject;
 
@@ -195,7 +229,7 @@ Cl_base* Cl_base::getObjectByPath(string path)
 		}
 	}
 
-	return currentObject;
+	return currentObject;*/
 }
 
 
