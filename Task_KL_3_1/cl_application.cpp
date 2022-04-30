@@ -55,6 +55,10 @@ void Cl_application::buildTree()
 
 		case 3:
 		{
+			if (childName == "object_7")
+			{
+				cout << "flag!";
+			}
 			Cl_base* child = new Cl_branch_2(childName, currentParentPtr);
 			break;
 		}

@@ -14,7 +14,7 @@ private:
 	string objectName = "";
 
 	// Указатель на родителя объекта
-	Cl_base* parentPtr;
+	Cl_base* parentPtr = nullptr;
 
 	//Состояние готовности объекта
 	bool readiness = false;
